@@ -73,7 +73,7 @@ WSGI_APPLICATION = 'opd_booking.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-auth_db = config(str(BASE_DIR) + "\\opd_booking\\configs\\" + "pg_service.ini", "auth")
+auth_db = config(str(BASE_DIR) + "/opd_booking/configs/" + "pg_service.ini", "auth")
 
 DATABASES = {
     'default': {
