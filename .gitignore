@@ -160,3 +160,5 @@ cython_debug/
 .idea/
 
 path/
+
+opd_booking/opd_booking/configs/pg_service.ini
