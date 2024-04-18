@@ -1,17 +1,15 @@
-version: '3'
+version: "3.9"
 services:
-  db:
-    image: postgres:latest
-    restart: always
+  postgres:
+    image: postgres:13.3
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: mydb
+      POSTGRES_DB: "mydb"
+      POSTGRES_USER: "pguser"
+      POSTGRES_PASSWORD: "pgpwd"
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ./data:/var/lib/postgresql/data
+      - .:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
 
-#docker-compose up -d
-#docker-compose down
+#docker compose pull && docker compose up -d
+#docker compose down
