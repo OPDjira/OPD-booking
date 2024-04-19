@@ -43,3 +43,5 @@ def get_occupied_rooms(building):
         except KeyError:
             print(f"Аудитория {rooms[str(building)][room]} вне расписания")
     return answer
+
+print(get_occupied_rooms("1-й учебный корпус"))
