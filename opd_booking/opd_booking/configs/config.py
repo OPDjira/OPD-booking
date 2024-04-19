@@ -5,7 +5,6 @@ import os
 def config(filename="config.conf", section="postgresql"):
     parser = ConfigParser()
     parser.read(filename)
-    print(parser.sections())
     data = {}
     if parser.has_section(section):
         params = parser[section].items()
