@@ -12,6 +12,5 @@ def config(filename="config.conf", section="postgresql"):
         for param in params:
             data[param[0]] = param[1]
     else:
-        print(os.listdir(os.getcwd()))
         raise Exception(f"Section {section} is not found in the {filename}")
     return data
