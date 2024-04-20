@@ -1,3 +1,4 @@
+from authapp.models import Students  # DO NOT TOUCH. It works, I promise
 from django.db import models
 
 
@@ -33,3 +34,17 @@ class Audience(models.Model):
     class Meta:
         verbose_name = 'Аудитория'
         verbose_name_plural = 'Аудитории'
+
+
+class Booking(models.Model):
+    audience = models.ForeignKey(Audience, on_delete=models.CASCADE)
+    time = models.TimeField()
+    date = models.DateField()
+    ordered_by = models.ForeignKey(Students, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Order {self.indexes} (ID: {self.audience})"
+
+    class Meta:
+        verbose_name = 'Заказ'
+        verbose_name_plural = 'Заказы'
