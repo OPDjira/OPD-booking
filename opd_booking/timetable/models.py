@@ -6,7 +6,7 @@ from django.db import models
 
 class Building(models.Model):
     building_id = models.IntegerField()
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=255)
 
     def __str__(self):
         return f"{self.name} (ID: {self.building_id})"
@@ -18,7 +18,7 @@ class Building(models.Model):
 
 class Audience(models.Model):
     interior_id = models.IntegerField()
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=255)
     building = models.ForeignKey(Building, on_delete=models.CASCADE)
     is_available_for_book = models.BooleanField(default=True)
     TYPE_CHOICES = (
@@ -26,7 +26,7 @@ class Audience(models.Model):
         ("Practice", "Practice"),
         ("Labs", "Labs")
     )
-    type = models.CharField(max_length=50, choices=TYPE_CHOICES, default="None")
+    type = models.CharField(max_length=255, choices=TYPE_CHOICES, default="None")
 
     def __str__(self):
         return f"{self.name} (ID: {self.interior_id}) | {self.building}"
