@@ -13,21 +13,26 @@ class Command(BaseCommand):
 
         for audience in building.audience_set.all():
             req = get(
-                f"https://ruz.spbstu.ru/api/v1/ruz/buildings/{building.id}/rooms/{audience.interior_id}/scheduler")
+                f"https://ruz.spbstu.ru/api/v1/ruz/buildings/{building.id}/rooms/{audience.interior_id}/scheduler"
+            )
             try:
-                for lessons in req.json()['days']:
-                    for lesson in lessons["lessons"]:
-                        temp = {"time_start": lesson["time_start"],
-                                "time_end": lesson["time_end"],
-                                "date": lessons["date"]}
-                        booking, created = Booking.objects.get_or_create(audience=audience, time=temp["time_start"],
-                                                                         date=temp["date"])
-                        if created:
-                            print(
-                                f"Booking created for {audience.name} on {temp['date']} from {temp['time_start']} to {temp['time_end']}")
-                        else:
-                            print(
-                                f"Booking already exists for {audience.name} on {temp['date']} from {temp['time_start']} to {temp['time_end']}")
+                days = req.json()['days']
+                if days is not None:
+                    for lessons in req.json()['days']:
+                        for lesson in lessons["lessons"]:
+                            temp = {"time_start": lesson["time_start"],
+                                    "time_end": lesson["time_end"],
+                                    "date": lessons["date"]}
+                            booking, created = Booking.objects.get_or_create(audience=audience, time=temp["time_start"],
+                                                                             date=temp["date"])
+                            if created:
+                                print(
+                                    f"Booking created for {audience.name} on {temp['date']} from {temp['time_start']} to {temp['time_end']}")
+                            else:
+                                print(
+                                    f"Booking already exists for {audience.name} on {temp['date']} from {temp['time_start']} to {temp['time_end']}")
+                else:
+                    print(f"Аудитория {audience.name} не имеет пар")
             except KeyError:
                 print(f"Аудитория {audience.name} не найден")
     def add_arguments(self, parser):
