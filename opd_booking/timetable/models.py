@@ -5,7 +5,7 @@ from django.db import models
 # Create your models here.
 
 class Building(models.Model):
-    building_id = models.IntegerField()
+    building_id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255)
 
     def __str__(self):
@@ -17,7 +17,7 @@ class Building(models.Model):
 
 
 class Audience(models.Model):
-    interior_id = models.IntegerField()
+    interior_id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255)
     building = models.ForeignKey(Building, on_delete=models.CASCADE)
     is_available_for_book = models.BooleanField(default=True)

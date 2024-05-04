@@ -8,6 +8,7 @@ import json
 from rest_framework.renderers import JSONRenderer
 from authapp.models import Students
 from authapp.serializers import StudentsSerializer
+from django.db.models import Q
 # Create your views here.
 
 @csrf_exempt
@@ -16,7 +17,7 @@ def login(request):
     if request.method == "POST":
         data = json.loads((request.body.decode('utf-8')))
         try:
-            query = Students.objects.get(email=data["username"], password=data["password"])
+            query = Students.objects.get(Q(email=data["username"]) | Q(username=data["username"]), password=data["password"])
             serializer = StudentsSerializer(query)
             return JsonResponse(serializer.data, status=status.HTTP_200_OK)
         except Exception:
