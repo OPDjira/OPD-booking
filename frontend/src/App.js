@@ -1,34 +1,17 @@
-import React, { useState } from 'react';
-import CampusSelection from './blog';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Login from './Login';
+import MainPage from './MainPage';
 
-const App = () => {
-    const [selectedCampus, setSelectedCampus] = useState(null);
-    const [selectedDate, setSelectedDate] = useState('');
-    const [selectedTime, setSelectedTime] = useState('');
-
-    const handleCampusSelect = (campus) => {
-        setSelectedCampus(campus);
-    };
-
-    const handleDateTimeSelect = (campus, date, time) => {
-        setSelectedCampus(campus);
-        setSelectedDate(date);
-        setSelectedTime(time);
-    };
-
-    const campuses = [
-        { id: 1, name: 'Корпус А' },
-        { id: 2, name: 'Корпус Б' },
-        { id: 3, name: 'Корпус В' },
-    ];
-
+function App() {
     return (
-        <div>
-            <h1>Бронирование аудиторий</h1>
-            <CampusSelection campuses={campuses} onSelect={handleCampusSelect} onDateTimeSelect={handleDateTimeSelect} />
-            {/* Здесь можно добавить дополнительные компоненты для даты, времени и т. д. */}
-        </div>
+        <Router>
+            <Switch>
+                <Route exact path="/" component={Login} />
+                <Route path="/MainPage" component={MainPage} />
+            </Switch>
+        </Router>
     );
-};
+}
 
 export default App;

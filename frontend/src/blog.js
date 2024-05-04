@@ -45,7 +45,7 @@ const CampusSelection = ({ campuses, onSelect, onDateTimeSelect }) => {
         };
         const jsonData = JSON.stringify(selectedValues);
         console.log(jsonData); // Выводим выбранные значения в формате JSON
-        fetch('https://example.com/login', { //должен быть норм адрес бэкенд-сервера
+        fetch('http://127.0.0.1:8000/booking/', { //должен быть норм адрес бэкенд-сервера
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
