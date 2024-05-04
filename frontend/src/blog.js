@@ -38,11 +38,13 @@ const CampusSelection = ({ campuses, onSelect, onDateTimeSelect }) => {
     };
 
     const handleProceedToAuditoriumSelection = () => {
-        const selectedValues = {
+        let selectedValues = {
             building: selectedCampus.id,
             date: selectedDate,
             time: selectedTime
         };
+        selectedValues = {building: 11, date: "2024-05-03", time: "10:00"};
+        //пример для определеленной даты. Затем selectedValues поменять на const
         const jsonData = JSON.stringify(selectedValues);
         console.log(jsonData); // Выводим выбранные значения в формате JSON
         fetch('http://127.0.0.1:8000/booking/', { //должен быть норм адрес бэкенд-сервера
