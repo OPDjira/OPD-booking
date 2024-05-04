@@ -13,7 +13,7 @@ class Command(BaseCommand):
 
         for audience in building.audience_set.all():
             req = get(
-                f"https://ruz.spbstu.ru/api/v1/ruz/buildings/{building.id}/rooms/{audience.interior_id}/scheduler"
+                f"https://ruz.spbstu.ru/api/v1/ruz/buildings/{building.building_id}/rooms/{audience.interior_id}/scheduler"
             )
             try:
                 days = req.json()['days']
