@@ -17,7 +17,7 @@ const MainPage = () => {
     };
 
     const campuses = [
-        { id: 1, name: 'Корпус А' },
+        { id: 11, name: 'Корпус А' },
         { id: 2, name: 'Корпус Б' },
         { id: 3, name: 'Корпус В' },
     ];
