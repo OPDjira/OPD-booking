@@ -4,7 +4,7 @@ from django.core.management.base import BaseCommand
 from timetable.models import Building, Audience, Booking
 
 class Command(BaseCommand):
-    def book_building(self, building_name):
+    def book_building(self, building_name, date=None):
         try:
             building = Building.objects.get(name=building_name)
         except Building.DoesNotExist:
@@ -12,9 +12,10 @@ class Command(BaseCommand):
             return
 
         for audience in building.audience_set.all():
-            req = get(
-                f"https://ruz.spbstu.ru/api/v1/ruz/buildings/{building.building_id}/rooms/{audience.interior_id}/scheduler"
-            )
+            url = f"https://ruz.spbstu.ru/api/v1/ruz/buildings/{building.building_id}/rooms/{audience.interior_id}/scheduler"
+            if date:
+                url += f"?date={date}"
+            req = get(url)
             try:
                 days = req.json()['days']
                 if days is not None:
@@ -35,12 +36,17 @@ class Command(BaseCommand):
                     print(f"Аудитория {audience.name} не имеет пар")
             except KeyError:
                 print(f"Аудитория {audience.name} не найден")
+
     def add_arguments(self, parser):
         parser.add_argument('building', type=str, nargs='?', default="none")
+        parser.add_argument('-d', '--date', type=str, help='Date in format YYYY.MM.DD')
+
     def handle(self, *args, **options):
         building = options["building"]
+        date = options.get("date")
+
         if building != "none":
-            self.book_building(building)
+            self.book_building(building, date)
         else:
             # Корпуса
             req = get("https://ruz.spbstu.ru/api/v1/ruz/buildings/")
@@ -68,19 +74,21 @@ class Command(BaseCommand):
                     audience, created = Audience.objects.get_or_create(interior_id=room_id, defaults={'name': room_name, 'building': building})
                     print(str(audience) + ": " + str(created))
 
-        def get_occupied_rooms_str(self, building_name):
-            building = Building.objects.get(name=building_name)
-            answer = {"rooms": {}}
-            for room in building.audience_set.all():
-                req = get(f"https://ruz.spbstu.ru/api/v1/ruz/buildings/{building.id}/rooms/{room.id}/scheduler")
-                try:
-                    answer["rooms"][room.id] = []
-                    for lessons in req.json()['days']:
-                        temp = {"time_start": lessons["lessons"][0]["time_start"],
-                                "time_end": lessons["lessons"][0]["time_end"],
-                                "date": lessons["date"]}
-                        answer["rooms"][room.id].append(temp)
-                except KeyError:
-                    print(f"Аудитория {room.id} не найден")
-            return answer
-
+    def get_occupied_rooms_str(self, building_name, date=None):
+        building = Building.objects.get(name=building_name)
+        answer = {"rooms": {}}
+        for room in building.audience_set.all():
+            url = f"https://ruz.spbstu.ru/api/v1/ruz/buildings/{building.building_id}/rooms/{room.interior_id}/scheduler"
+            if date:
+                url += f"?date={date}"
+            req = get(url)
+            try:
+                answer["rooms"][room.interior_id] = []
+                for lessons in req.json()['days']:
+                    temp = {"time_start": lessons["lessons"][0]["time_start"],
+                            "time_end": lessons["lessons"][0]["time_end"],
+                            "date": lessons["date"]}
+                    answer["rooms"][room.interior_id].append(temp)
+            except KeyError:
+                print(f"Аудитория {room.interior_id} не найден")
+        return answer
