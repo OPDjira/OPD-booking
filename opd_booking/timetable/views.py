@@ -11,7 +11,7 @@ from django.db.models import Q
 # Create your views here.
 @csrf_exempt
 def booking(request):
-    if request.method == "GET":
+    if request.method == "POST":
         response = {"bookings": []}
         data = json.loads((request.body.decode('utf-8')))
         audiences = Audience.objects.filter(building=data["building"])
@@ -20,5 +20,6 @@ def booking(request):
             if len(query) > 0:
                 serializer = BookingSerializer(query.get())
                 response["bookings"].append(serializer.data)
+        print(response)
         return JsonResponse(response, status=status.HTTP_200_OK)
 

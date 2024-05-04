@@ -18,8 +18,8 @@ const MainPage = () => {
 
     const campuses = [
         { id: 11, name: 'Корпус А' },
-        { id: 2, name: 'Корпус Б' },
-        { id: 3, name: 'Корпус В' },
+        { id: 12, name: 'Корпус Б' },
+        { id: 13, name: 'Корпус В' },
     ];
 
     return (

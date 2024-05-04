@@ -38,13 +38,13 @@ function Login() {
                 throw new Error('Network response was not ok.');
             })
             .then(data => {
-                alert('Login successful!');
+                console.log('Login successful!');
                 history.push('/MainPage');
 
             })
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
-                alert('Login failed. Please try again.');
+                console.log('Login failed. Please try again.');
             });
     };
 

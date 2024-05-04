@@ -39,7 +39,7 @@ const CampusSelection = ({ campuses, onSelect, onDateTimeSelect }) => {
 
     const handleProceedToAuditoriumSelection = () => {
         const selectedValues = {
-            campus: selectedCampus.id,
+            building: selectedCampus.id,
             date: selectedDate,
             time: selectedTime
         };
@@ -59,11 +59,12 @@ const CampusSelection = ({ campuses, onSelect, onDateTimeSelect }) => {
                 throw new Error('Network response was not ok.');
             })
             .then(data => {
-                alert('Login successful!');
+                console.log('Booking successful!');
+                console.log('Booking Data:', data); // Выводим полученные данные о бронированиях
             })
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
-                alert('Login failed. Please try again.');
+                console.log('Booking failed. Please try again.');
             });
     };
 
