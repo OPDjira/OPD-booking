@@ -7,10 +7,6 @@ function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const toggleForm = () => {
-        setIsSignUp(!isSignUp);
-    };
-
     const handleUsernameChange = (e) => {
         setUsername(e.target.value);
     };
@@ -39,7 +35,7 @@ function Login() {
             })
             .then(data => {
                 console.log('Login successful!');
-                history.push('/MainPage');
+                history.push('/MainPage', { username: username });
 
             })
             .catch(error => {
@@ -49,27 +45,13 @@ function Login() {
     };
 
     return (
-        <div className="container" id="container">
-            <div className={`form-container ${isSignUp ? 'sign-up-container' : 'sign-in-container'}`}>
+        <div className="loginContainer" id="loginContainer">
                 <form onSubmit={handleSubmit}>
-                    <h1>{isSignUp ? 'Create Account' : 'Sign in'}</h1>
-                    <span>{isSignUp ? 'or use your email for registration' : 'or use your account'}</span>
-                    {isSignUp && <input type="text" placeholder="Name" />}
-                    <input type="text" id="username" placeholder="Email" value={username} onChange={handleUsernameChange} />
-                    <input type="password" id="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
-                    {!isSignUp && <a href="#">Forgot your password?</a>}
-                    <button type="submit">{isSignUp ? 'Sign Up' : 'Login'}</button>
+                <h1>Sign in</h1>
+                <input type="text" className="username" id="username" placeholder="Email" value={username} onChange={handleUsernameChange} />
+                <input type="password" className="password" id="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
+                <button type="submit">{isSignUp ? 'Sign Up' : 'Login'}</button>
                 </form>
-            </div>
-            <div className="overlay-container">
-                <div className="overlay">
-                    <div className={`overlay-panel ${isSignUp ? 'overlay-right' : 'overlay-left'}`}>
-                        <h1>{isSignUp ? 'Hello, Friend!' : 'Welcome Back!'}</h1>
-                        <p>{isSignUp ? 'Enter your personal details and start journey with us' : 'To keep connected with us please login with your personal info'}</p>
-                        <button className="ghost" onClick={toggleForm}>{isSignUp ? 'Sign Up' : 'Sign In'}</button>
-                    </div>
-                </div>
-            </div>
         </div>
     );
 }

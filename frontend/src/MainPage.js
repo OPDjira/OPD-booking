@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import CampusSelection from './blog';
+import CampusSelection from './CampusSelection';
 
-const MainPage = () => {
+const MainPage = ({ username }) => {
     const [selectedCampus, setSelectedCampus] = useState(null);
     const [selectedDate, setSelectedDate] = useState('');
     const [selectedTime, setSelectedTime] = useState('');
@@ -25,8 +25,11 @@ const MainPage = () => {
     return (
         <div>
             <h1>Бронирование аудиторий</h1>
-            <CampusSelection campuses={campuses} onSelect={handleCampusSelect} onDateTimeSelect={handleDateTimeSelect} />
-            {/* Здесь можно добавить дополнительные компоненты для даты, времени и т. д. */}
+            <CampusSelection 
+                campuses={campuses} 
+                onSelect={handleCampusSelect} 
+                onDateTimeSelect={handleDateTimeSelect} 
+                username={username}/>
         </div>
     );
 };
