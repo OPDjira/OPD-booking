@@ -6,7 +6,7 @@ import json
 from rest_framework.renderers import JSONRenderer
 from timetable.models import Booking, Audience, Building
 from django.views.decorators.csrf import csrf_exempt
-from timetable.serializers import BookingSerializer
+from timetable.serializers import BookingSerializer, AudienceSerializer
 from django.db.models import Q
 from authapp.models import Students
 
@@ -64,3 +64,15 @@ def make_booking(request):
         return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
 
     return JsonResponse({"error": "Invalid request method"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+@csrf_exempt
+def audiences(request):
+    if request.method == "POST":
+        response = {"audiences": []}
+        data = json.loads((request.body.decode('utf-8')))
+        audiences = Audience.objects.filter(building=data["building"])
+        for i in audiences:
+                serializer = AudienceSerializer(i)
+                response["audiences"].append(serializer.data)
+        return JsonResponse(response, status=status.HTTP_200_OK)
