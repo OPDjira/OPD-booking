@@ -13,7 +13,7 @@ from authapp.models import Students
 # Create your views here.
 @csrf_exempt
 def booking(request):
-    if request.method == "GET":
+    if request.method == "POST":
         response = {"bookings": []}
         data = json.loads((request.body.decode('utf-8')))
         audiences = Audience.objects.filter(building=data["building"])
