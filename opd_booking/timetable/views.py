@@ -18,7 +18,7 @@ def booking(request):
         data = json.loads((request.body.decode('utf-8')))
         audiences = Audience.objects.filter(building=data["building"])
         for i in audiences:
-            query = Booking.objects.filter(date=data["date"], time=data["time"], audience=i.interior_id)
+            query = Booking.objects.filter(date=data["date"], time=data["time"], audience=i.name)
             if len(query) > 0:
                 serializer = BookingSerializer(query.get())
                 response["bookings"].append(serializer.data)
