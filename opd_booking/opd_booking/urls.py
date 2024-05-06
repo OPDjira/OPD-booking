@@ -21,5 +21,6 @@ from timetable import views as timetable_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', auth_views.login),
-    path('booking/', timetable_views.booking)
+    path('booking/', timetable_views.booking),
+    path('make-booking/', timetable_views.make_booking)
 ]
