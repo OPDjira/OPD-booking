@@ -29,17 +29,17 @@ def make_booking(request):
     if request.method == "POST":
         data = json.loads((request.body.decode('utf-8')))
         building_id = data.get("building")
-        audience_id = data.get("audience")
+        audience_name = data.get("audience")
         date = data.get("date")
         time = data.get("time")
         student_email = data.get("email")
 
-        if not all([building_id, audience_id, date, time, student_email]):
+        if not all([building_id, audience_name, date, time, student_email]):
             return JsonResponse({"error": "Missing required fields"}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
             building = Building.objects.get(building_id=building_id)
-            audience = Audience.objects.get(interior_id=audience_id, building=building)
+            audience = Audience.objects.get(name=audience_name, building=building)
         except (Building.DoesNotExist, Audience.DoesNotExist):
             return JsonResponse({"error": "Invalid building or audience"}, status=status.HTTP_404_NOT_FOUND)
 
