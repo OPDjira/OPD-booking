@@ -23,10 +23,7 @@ def booking(request):
                 serializer = BookingSerializer(query.get())
                 response["bookings"].append(serializer.data)
         return JsonResponse(response, status=status.HTTP_200_OK)
-
-@csrf_exempt
-def make_booking(request):
-    if request.method == "POST":
+    elif request.method == "POST":
         data = json.loads((request.body.decode('utf-8')))
         building_id = data.get("building_id")
         audience_id = data.get("audience_id")
@@ -62,3 +59,4 @@ def make_booking(request):
         return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
 
     return JsonResponse({"error": "Invalid request method"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
