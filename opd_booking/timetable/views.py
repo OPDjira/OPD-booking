@@ -13,7 +13,7 @@ from authapp.models import Students
 # Create your views here.
 @csrf_exempt
 def booking(request):
-    if request.method == "GET":
+    if request.method == "POST":
         response = {"bookings": []}
         data = json.loads((request.body.decode('utf-8')))
         audiences = Audience.objects.filter(building=data["building"])
@@ -23,7 +23,10 @@ def booking(request):
                 serializer = BookingSerializer(query.get())
                 response["bookings"].append(serializer.data)
         return JsonResponse(response, status=status.HTTP_200_OK)
-    elif request.method == "POST":
+
+@csrf_exempt
+def make_booking(request):
+    if request.method == "POST":
         data = json.loads((request.body.decode('utf-8')))
         building_id = data.get("building")
         audience_id = data.get("audience")
@@ -59,4 +62,3 @@ def booking(request):
         return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
 
     return JsonResponse({"error": "Invalid request method"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
-
