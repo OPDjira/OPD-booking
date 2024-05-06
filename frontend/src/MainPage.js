@@ -4,7 +4,8 @@ import { useHistory } from 'react-router-dom';
 const MainPage = ({ location }) => {
     const history = useHistory();
     const { student_email } = location.state || '';
-    console.log(student_email);
+    const [loading, setLoading] = useState(false);
+
 
     const campuses = [
         { id: 13, name: 'Гидротехнический корпус-1' },
@@ -97,46 +98,44 @@ const MainPage = ({ location }) => {
         return days[dayIndex];
     };
 
-        const handleProceedToAuditoriumSelection = () => {
-            let selectedValues = {
-                building: selectedCampus.id,
-                date: selectedDate,
-                time: selectedTime
-            };
-
-            const jsonData = JSON.stringify(selectedValues);
-            console.log(jsonData);
-            fetch('http://127.0.0.1:8000/booking/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: jsonData
-            })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    }
-                    throw new Error('Network response was not ok.');
-                })
-                .then(data => {
-                    console.log('Booking successful!');
-                    console.log('Booking Data:', data);
-                    history.push('/Gidro1', { selectedCampus: selectedCampus, selectedDate: selectedDate, selectedTime : selectedTime, 
-                        selectedAudiences: data, student_email : student_email } );
-
-
-                })
-                .catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
-                    console.log('Booking failed. Please try again.');
-                });
+    const handleProceedToAuditoriumSelection = () => {
+        setLoading(true); // Установка состояния загрузки перед началом запроса
+        let selectedValues = {
+            building: selectedCampus.id,
+            date: selectedDate,
+            time: selectedTime
         };
 
-       
+        const jsonData = JSON.stringify(selectedValues);
+        console.log(jsonData);
+        fetch('http://127.0.0.1:8000/booking/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: jsonData
+        })
+            .then(response => {
+                setLoading(false); // Обновление состояния загрузки после завершения запроса
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Network response was not ok.');
+            })
+            .then(data => {
+                console.log('Booking successful!');
+                console.log('Booking Data:', data);
+                history.push('/Gidro1', { selectedCampus: selectedCampus, selectedDate: selectedDate, selectedTime: selectedTime, unavailableAuditoriums: data, student_email: student_email });
+            })
+            .catch(error => {
+                setLoading(false); // Обновление состояния загрузки в случае ошибки
+                console.error('There was a problem with the fetch operation:', error);
+                console.log('Booking failed. Please try again.');
+            });
+    };
 
         return (
-            <div>
+            <div className='main_page'>
                 <h1>Бронирование аудиторий</h1>
                 {!selectedCampus ? (
                     <div>
@@ -178,6 +177,7 @@ const MainPage = ({ location }) => {
                         <button className='chooseRoomStep' onClick={handleProceedToAuditoriumSelection}>Перейти к выбору аудиторий</button>
                     </div>
                 )}
+                {loading && <p>Loading...</p>}
 
             </div>
         );

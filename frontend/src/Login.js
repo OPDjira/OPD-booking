@@ -39,10 +39,12 @@ function Login() {
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
                 console.log('Login failed. Please try again.');
+                window.alert('Login failed. Please try again.');
             });
     };
 
     return (
+        <div className="login">
         <div className="loginContainer" id="loginContainer">
                 <form onSubmit={handleSubmit}>
                 <h1>Sign in</h1>
@@ -50,6 +52,7 @@ function Login() {
                 <input type="password" className="password" id="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
                 <button type="submit">Login</button>
                 </form>
+        </div>
         </div>
     );
 }
