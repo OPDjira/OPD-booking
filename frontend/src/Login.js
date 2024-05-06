@@ -35,6 +35,7 @@ function Login() {
             })
             .then(data => {
                 console.log('Login successful!');
+                console.log("Login ", username)
                 history.push('/MainPage', { username: username });
 
             })

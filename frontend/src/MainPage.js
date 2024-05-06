@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import CampusSelection from './CampusSelection';
 
-const MainPage = ({ username }) => {
+const MainPage = ({ location }) => {
+    const { username } = location.state || {};
+    console.log("MainPage ", username)
     const [selectedCampus, setSelectedCampus] = useState(null);
     const [selectedDate, setSelectedDate] = useState('');
     const [selectedTime, setSelectedTime] = useState('');
@@ -29,7 +31,7 @@ const MainPage = ({ username }) => {
                 campuses={campuses} 
                 onSelect={handleCampusSelect} 
                 onDateTimeSelect={handleDateTimeSelect} 
-                username={username}/>
+                student_email={username}/>
         </div>
     );
 };

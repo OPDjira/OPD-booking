@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
-const CampusSelection = ({ campuses, onSelect, onDateTimeSelect, username }) => {
+const CampusSelection = ({ campuses, onSelect, onDateTimeSelect, student_email }) => {
+    console.log("CampusSelection ", student_email)
     const [selectedCampus, setSelectedCampus] = useState(null);
     const [selectedDate, setSelectedDate] = useState('');
     const [selectedTime, setSelectedTime] = useState('');
@@ -129,17 +130,19 @@ const CampusSelection = ({ campuses, onSelect, onDateTimeSelect, username }) => 
     };
 
     const handleBookAuditorium = (auditoriumId) => {
-        const selectedValues = {
-            building: selectedCampus.id,
-            auditorium: auditoriumId,
+        let selectedValues = {
+            building_id: selectedCampus.id,
+            audience_id: auditoriumId,
             date: selectedDate,
             time: selectedTime,
-            ordered_by: username
+            student_email: student_email
         };
+        selectedValues = { building_id: 11, audience_id: auditoriumId, date: "2024-05-03", time: "10:00", student_email: student_email };
+        //пример для определеленной даты. Затем selectedValues поменять на const
         console.log(selectedValues);
         const jsonData = JSON.stringify(selectedValues);
 
-        fetch('http://127.0.0.1:8000/newbooking', {
+        fetch('http://127.0.0.1:8000/booking/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
