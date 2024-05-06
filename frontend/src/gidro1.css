@@ -21,7 +21,9 @@ button.cnangeButton {
     margin-top: 30px;
 }
 
-.gidro1_floor2 {
-
-    min-width: 90%;
+svg.gidro2_container{
+    width: 800px;
+    margin-top: -200px;
+    margin-bottom: -200px;
+    max-width: 100%;
 }

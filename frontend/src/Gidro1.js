@@ -66,6 +66,17 @@ function Gidro1( props ) {
         { 1037: '317'},
         { 632: '322'}]
 
+    function containsValue(array, value) {
+    for (let obj of array) {
+        for (let key in obj) {
+            if (obj[key] === value) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
     function getName(auditorium) {
         return Object.values(auditorium)[0];
     }
@@ -94,7 +105,7 @@ function Gidro1( props ) {
         let selectedValues = {
             building: selectedCampus.id,
             audience: auditoriumId,
-            date: "2024-05-04", //selectedDate
+            date: selectedDate,
             time: selectedTime,
             email: student_email
         };
@@ -131,6 +142,9 @@ function Gidro1( props ) {
     return ( //svg добавлена в код напрямую для возможности взаимодействия
 
         <div className='container'>
+            <h1>Гидротехнический корпус-1</h1>
+            <h1>{selectedDate}</h1>
+            <h1>{selectedTime}</h1>
             <button className= 'cnangeButton' onClick={toggleView}>Показать {showAuditoriumList ? 'план здания' : 'список аудиторий'}</button>
             {showAuditoriumList ? (
                 <div className='gidro1_container'>
@@ -149,24 +163,24 @@ function Gidro1( props ) {
                         <div className="App">
                             <div className="gidro1_floor2">
                                 <h1>Этаж 2</h1>
-                                <svg version="1.1" viewBox="0 0 482.08 850.16" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" style={{ transform: "scale(0.7)" }}>
+                                <svg className="gidro2_container" version="1.1" viewBox="0 0 482.08 850.16" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" style={{ transform: "scale(0.7)" }}>
                                     <g className="rect" transform="translate(-8.501 -7.9419)">
-                                        <rect id="1" x="99.629" y="542.07" width="42.161" height="35.002" fill={unavailableAuditoriums.includes('1') ? 'red' : (selectedRoom && selectedRoom.id === '1' ? 'green' : '#9966ff')} fillOpacity=".43922" fillRule="evenodd" onClick={(e) => handleRectClick(e)} />
-                                        <rect id="2" x="99.541" y="578.4" width="42.426" height="35.797" fill={unavailableAuditoriums.includes('2') ? 'red' : (selectedRoom && selectedRoom.id === '2' ? 'green' : '#9966ff')} fillOpacity=".43922" fillRule="evenodd" onClick={(e) => handleRectClick(e)} />
-                                        <rect id="3" x="99.364" y="615.61" width="42.515" height="37.035" fill={unavailableAuditoriums.includes('3') ? 'red' : (selectedRoom && selectedRoom.id === '3' ? 'green' : '#9966ff')} fillOpacity=".43922" fillRule="evenodd" onClick={(e) => handleRectClick(e)} />
-                                        <rect id="4" x="99.187" y="654.06" width="42.603" height="35.002" fill={unavailableAuditoriums.includes('4') ? 'red' : (selectedRoom && selectedRoom.id === '4' ? 'green' : '#9966ff')} fillOpacity=".43922" fillRule="evenodd" onClick={(e) => handleRectClick(e)} />
-                                        <rect id="5" x="232" y="738.57" width="33.5" height="42.375" fill={unavailableAuditoriums.includes('5') ? 'red' : (selectedRoom && selectedRoom.id === '5' ? 'green' : '#9966ff')} fillOpacity=".43922" fillRule="evenodd" onClick={(e) => handleRectClick(e)} />
-                                        <rect id="6" x="266.5" y="738.44" width="39.75" height="42.125" fill={unavailableAuditoriums.includes('6') ? 'red' : (selectedRoom && selectedRoom.id === '6' ? 'green' : '#9966ff')} fillOpacity=".43922" fillRule="evenodd" onClick={(e) => handleRectClick(e)} />
-                                        <rect id="7" x="37.316" y="690.12" width="43.134" height="35.709" fill={unavailableAuditoriums.includes('7') ? 'red' : (selectedRoom && selectedRoom.id === '7' ? 'green' : '#9966ff')} fillOpacity=".43922" fillRule="evenodd" onClick={(e) => handleRectClick(e)} />
-                                        <rect id="8" x="99.407" y="127.52" width="41.986" height="36.336" fill={unavailableAuditoriums.includes('8') ? 'red' : (selectedRoom && selectedRoom.id === '8' ? 'green' : '#9966ff')} fillOpacity=".44062" strokeWidth=".99339" onClick={(e) => handleRectClick(e)} />
-                                        <rect id="9" x="99.54" y="53.924" width="42.282" height="72.672" fill={unavailableAuditoriums.includes('9') ? 'red' : (selectedRoom && selectedRoom.id === '9' ? 'green' : '#9966ff')} fillOpacity=".44062" onClick={(e) => handleRectClick(e)} />
-                                        <rect id="10" x="37.438" y="65.551" width="42.546" height="61.045" fill={unavailableAuditoriums.includes('10') ? 'red' : (selectedRoom && selectedRoom.id === '10' ? 'green' : '#9966ff')} fillOpacity=".44062" onClick={(e) => handleRectClick(e)} />
-                                        <rect id="11" x="37.702" y="127.92" width="42.282" height="54.702" fill={unavailableAuditoriums.includes('11') ? 'red' : (selectedRoom && selectedRoom.id === '11' ? 'green' : '#9966ff')} fillOpacity=".44062" onClick={(e) => handleRectClick(e)} />
-                                        <rect id="12" x="37.702" y="319.11" width="42.282" height="18.498" fill={unavailableAuditoriums.includes('12') ? 'red' : (selectedRoom && selectedRoom.id === '12' ? 'green' : '#9966ff')} fillOpacity=".44062" onClick={(e) => handleRectClick(e)} />
-                                        <rect id="13" x="37.702" y="338.67" width="42.15" height="34.354" fill={unavailableAuditoriums.includes('13') ? 'red' : (selectedRoom && selectedRoom.id === '13' ? 'green' : '#9966ff')} fillOpacity=".44062" onClick={(e) => handleRectClick(e)} />
-                                        <rect id="14" x="107.91" y="448.56" width="49.145" height="72.316" fill={unavailableAuditoriums.includes('14') ? 'red' : (selectedRoom && selectedRoom.id === '14' ? 'green' : '#9966ff')} fillOpacity=".44062" onClick={(e) => handleRectClick(e)} />
-                                        <rect id="15" x="38.733" y="726.89" width="42.044" height="96.981" fill={unavailableAuditoriums.includes('15') ? 'red' : (selectedRoom && selectedRoom.id === '15' ? 'green' : '#9966ff')} fillOpacity=".44062" ry="0" transform="rotate(.093717)" fillRule="evenodd" onClick={(e) => handleRectClick(e)} />
-                                        <rect id="16" x="37.745" y="424.74" width="42.324" height="114.83" fill={unavailableAuditoriums.includes('16') ? 'red' : (selectedRoom && selectedRoom.id === '16' ? 'green' : '#9966ff')} fillOpacity=".44062" onClick={(e) => handleRectClick(e)} />
+                                        <rect id="235" x="99.629" y="542.07" width="42.161" height="35.002" fill={containsValue(unavailableAuditoriums, '235') ? 'red' : (selectedRoom && selectedRoom.id === '235' ? 'green' : '#9966ff')} fillOpacity=".43922" fillRule="evenodd" onClick={(e) => handleRectClick(e)} />
+                                        <rect id="234" x="99.541" y="578.4" width="42.426" height="35.797" fill={containsValue(unavailableAuditoriums, '234') ? 'red' : (selectedRoom && selectedRoom.id === '234' ? 'green' : '#9966ff')} fillOpacity=".43922" fillRule="evenodd" onClick={(e) => handleRectClick(e)} />
+                                        <rect id="233" x="99.364" y="615.61" width="42.515" height="37.035" fill={containsValue(unavailableAuditoriums, '233') ? 'red' : (selectedRoom && selectedRoom.id === '233' ? 'green' : '#9966ff')} fillOpacity=".43922" fillRule="evenodd" onClick={(e) => handleRectClick(e)} />
+                                        <rect id="232" x="99.187" y="654.06" width="42.603" height="35.002" fill={containsValue(unavailableAuditoriums, '232') ? 'red' : (selectedRoom && selectedRoom.id === '232' ? 'green' : '#9966ff')} fillOpacity=".43922" fillRule="evenodd" onClick={(e) => handleRectClick(e)} />
+                                        <rect id="230" x="232" y="738.57" width="33.5" height="42.375" fill={containsValue(unavailableAuditoriums, '230') ? 'red' : (selectedRoom && selectedRoom.id === '230' ? 'green' : '#9966ff')} fillOpacity=".43922" fillRule="evenodd" onClick={(e) => handleRectClick(e)} />
+                                        <rect id="229" x="266.5" y="738.44" width="39.75" height="42.125" fill={containsValue(unavailableAuditoriums, '229') ? 'red' : (selectedRoom && selectedRoom.id === '229' ? 'green' : '#9966ff')} fillOpacity=".43922" fillRule="evenodd" onClick={(e) => handleRectClick(e)} />
+                                        <rect id="213" x="37.316" y="690.12" width="43.134" height="35.709" fill={containsValue(unavailableAuditoriums, '213') ? 'red' : (selectedRoom && selectedRoom.id === '213' ? 'green' : '#9966ff')} fillOpacity=".43922" fillRule="evenodd" onClick={(e) => handleRectClick(e)} />
+                                        <rect id="238" x="99.407" y="127.52" width="41.986" height="36.336" fill={containsValue(unavailableAuditoriums, '238') ? 'red' : (selectedRoom && selectedRoom.id === '238' ? 'green' : '#9966ff')} fillOpacity=".44062" strokeWidth=".99339" onClick={(e) => handleRectClick(e)} />
+                                        <rect id="239" x="99.54" y="53.924" width="42.282" height="72.672" fill={containsValue(unavailableAuditoriums, '239') ? 'red' : (selectedRoom && selectedRoom.id === '239' ? 'green' : '#9966ff')} fillOpacity=".44062" onClick={(e) => handleRectClick(e)} />
+                                        <rect id="201" x="37.438" y="65.551" width="42.546" height="61.045" fill={containsValue(unavailableAuditoriums, '201') ? 'red' : (selectedRoom && selectedRoom.id === '201' ? 'green' : '#9966ff')} fillOpacity=".44062" onClick={(e) => handleRectClick(e)} />
+                                        <rect id="202" x="37.702" y="127.92" width="42.282" height="54.702" fill={containsValue(unavailableAuditoriums, '202') ? 'red' : (selectedRoom && selectedRoom.id === '202' ? 'green' : '#9966ff')} fillOpacity=".44062" onClick={(e) => handleRectClick(e)} />
+                                        <rect id="207" x="37.702" y="319.11" width="42.282" height="18.498" fill={containsValue(unavailableAuditoriums, '207') ? 'red' : (selectedRoom && selectedRoom.id === '207' ? 'green' : '#9966ff')} fillOpacity=".44062" onClick={(e) => handleRectClick(e)} />
+                                        <rect id="207а" x="37.702" y="338.67" width="42.15" height="34.354" fill={containsValue(unavailableAuditoriums, '207a') ? 'red' : (selectedRoom && selectedRoom.id === '207a' ? 'green' : '#9966ff')} fillOpacity=".44062" onClick={(e) => handleRectClick(e)} />
+                                        <rect id="241" x="107.91" y="448.56" width="49.145" height="72.316" fill={containsValue(unavailableAuditoriums, '241') ? 'red' : (selectedRoom && selectedRoom.id === '241' ? 'green' : '#9966ff')} fillOpacity=".44062" onClick={(e) => handleRectClick(e)} />
+                                        <rect id="214" x="38.733" y="726.89" width="42.044" height="96.981" fill={containsValue(unavailableAuditoriums, '214') ? 'red' : (selectedRoom && selectedRoom.id === '214' ? 'green' : '#9966ff')} fillOpacity=".44062" ry="0" transform="rotate(.093717)" fillRule="evenodd" onClick={(e) => handleRectClick(e)} />
+                                        <rect id="208" x="37.745" y="424.74" width="42.324" height="114.83" fill={containsValue(unavailableAuditoriums, '208') ? 'red' : (selectedRoom && selectedRoom.id === '208' ? 'green' : '#9966ff')} fillOpacity=".44062" onClick={(e) => handleRectClick(e)} />
                                     </g>
                                     <g transform="translate(-8.501 -7.9419)">
                                         <path transform="translate(8.501 7.9419)" d="m41.539 816.67v-2.4043h4.9214l0.11254 0.0729c0.57485 0.37234 0.9264 0.5871 1.1614 0.70945 0.0816 0.0425 0.12461 0.0598 0.16753 0.0672 0.07569 0.0131 0.20422 0.0668 0.42656 0.17799 0.20281 0.10145 0.2952 0.15221 0.75845 0.41666l0.33887 0.19345v0.0896l-0.27479-3e-3c-0.27305-3e-3 -0.3006-2e-3 -0.26765 0.01 0.03535 0.0123 0.24712 0.0235 0.44967 0.0237l0.09277 1e-4v3.0508h-7.8867zm5.0458-0.66057c-0.0013-1e-3 -0.0047-1e-3 -0.0075-3e-4 -0.0031 1e-3 -0.0022 2e-3 0.0024 2e-3 0.0041 1.7e-4 0.0064-7.6e-4 0.0051-2e-3zm-0.99198-4e-3c-0.01013-8e-4 -0.02771-8.1e-4 -0.03906-2e-5 -0.01135 8e-4 -0.0031 1e-3 0.01842 1e-3 0.02148 1e-5 0.03077-6.4e-4 0.02064-1e-3zm0.23034 1.8e-4c-0.0038-9.9e-4 -0.0099-9.9e-4 -0.01367 0-0.0038 9.8e-4 -6.83e-4 2e-3 0.0068 2e-3 0.0075 0 0.0106-8e-4 0.0068-2e-3zm-0.44238-5e-3c-0.01992-5e-3 -0.04251-8e-3 -0.03872-4e-3 5e-3 5e-3 0.01653 7e-3 0.03482 7e-3 0.01494 9e-5 0.01511-4e-5 0.0039-3e-3zm1.8173 1e-3c-0.0013-1e-3 -0.0047-1e-3 -0.0075-3.1e-4 -0.0031 1e-3 -0.0022 2e-3 0.0024 2e-3 0.0041 1.7e-4 0.0064-7.5e-4 0.0051-2e-3zm0.02438-5e-3c0.0032-2e-3 0.0044-5e-3 0.0027-7e-3s-0.0043-1e-3 -0.0057 1e-3c-0.0015 2e-3 -0.0054 5e-3 -0.0086 6e-3 -0.0052 2e-3 -0.0052 2e-3 0 2e-3 0.0032 1.3e-4 0.0084-1e-3 0.01161-3e-3zm-1.8544-0.0105c-0.0027-1e-3 -0.0071-1e-3 -0.0098 0s-4.88e-4 2e-3 0.0049 2e-3c0.0054 0 0.0076-8.9e-4 0.0049-2e-3zm1.7618-1.6e-4c-0.0048-9.3e-4 -0.01359-9.5e-4 -0.01953-6e-5 -0.0059 9e-4 -2e-3 2e-3 0.0087 2e-3 0.01074 3e-5 0.0156-7.1e-4 0.0108-2e-3zm-1.7266-4e-3c-0.0027-1e-3 -0.0071-1e-3 -0.0098 0s-4.89e-4 2e-3 0.0049 2e-3c0.0054 0 0.0076-8.8e-4 0.0049-2e-3zm0.81062-2e-4c-0.0059-8.9e-4 -0.01642-9.1e-4 -0.02344-4e-5 -7e-3 8.7e-4 -0.0022 2e-3 0.01067 2e-3 0.01289 2e-5 0.01864-6.9e-4 0.01277-2e-3zm0.08579 4.3e-4c-0.0013-1e-3 -0.0047-1e-3 -0.0075-3.1e-4 -0.0031 1e-3 -0.0022 2e-3 0.0024 2e-3 0.0041 1.7e-4 0.0064-7.5e-4 0.0051-2e-3z" fill="#fff" fillOpacity=".99221" fillRule="evenodd" />
@@ -3264,8 +3278,8 @@ function Gidro1( props ) {
                                     </g>
                                 </svg>
 
-                                {selectedRoom !== " " && <p>Выбрана аудитория с id: {selectedRoom.id}</p>}
-                                {selectedRoom !== " " && <button onClick={() => handleBookAuditorium(selectedRoom.id)}>Забронировать</button>}
+                                {selectedRoom !== " " && <p>Выбрана аудитория {selectedRoom.id}</p>}
+                                {selectedRoom !== " " && <button className="gidro1_container" onClick={() => handleBookAuditorium(selectedRoom.id)}>Забронировать</button>}
                             </div>
                         </div>
                 </div>
