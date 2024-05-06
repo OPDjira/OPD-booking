@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 
 function Login() {
     const history = useHistory();
-    const [isSignUp, setIsSignUp] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -18,8 +17,7 @@ function Login() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const loginData = { username, password };
-        console.log(JSON.stringify(loginData)); // Выводим данные в формате JSON
-        fetch('http://127.0.0.1:8000/login/', { // Замените на нужный адрес бэкенд-сервера
+        fetch('http://127.0.0.1:8000/login/', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
@@ -34,9 +32,8 @@ function Login() {
                 throw new Error('Network response was not ok.');
             })
             .then(data => {
-                console.log('Login successful!');
-                console.log("Login ", username)
-                history.push('/MainPage', { username: username });
+                console.log(data);
+                history.push('/MainPage', { student_email: username });
 
             })
             .catch(error => {
@@ -51,7 +48,7 @@ function Login() {
                 <h1>Sign in</h1>
                 <input type="text" className="username" id="username" placeholder="Email" value={username} onChange={handleUsernameChange} />
                 <input type="password" className="password" id="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
-                <button type="submit">{isSignUp ? 'Sign Up' : 'Login'}</button>
+                <button type="submit">Login</button>
                 </form>
         </div>
     );
