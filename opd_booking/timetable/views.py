@@ -25,11 +25,11 @@ def booking(request):
         return JsonResponse(response, status=status.HTTP_200_OK)
     elif request.method == "POST":
         data = json.loads((request.body.decode('utf-8')))
-        building_id = data.get("building_id")
-        audience_id = data.get("audience_id")
+        building_id = data.get("building")
+        audience_id = data.get("audience")
         date = data.get("date")
         time = data.get("time")
-        student_email = data.get("student_email")
+        student_email = data.get("email")
 
         if not all([building_id, audience_id, date, time, student_email]):
             return JsonResponse({"error": "Missing required fields"}, status=status.HTTP_400_BAD_REQUEST)
