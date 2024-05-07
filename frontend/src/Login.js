@@ -17,7 +17,7 @@ function Login() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const loginData = { username, password };
-        fetch('http://127.0.0.1:8000/login/', {
+        fetch('http://31.134.129.26:8000/login/', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json, text/plain, */*',

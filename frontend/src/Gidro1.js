@@ -113,7 +113,7 @@ function Gidro1( props ) {
         console.log(selectedValues);
         const jsonData = JSON.stringify(selectedValues);
 
-        fetch('http://127.0.0.1:8000/book/', {
+        fetch('http://31.134.129.26:8000/book/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
