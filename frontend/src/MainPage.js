@@ -53,7 +53,7 @@ const MainPage = ({ location }) => {
         const times = ['8:00', '10:00', '12:00', '14:00', '16:00', '18:00'];
         return times.map((time, index) => {
             const [hour] = time.split(':').map(Number);
-            if (selectedDate === today && hour < currentHour) {
+            if (selectedDate === today && hour <= currentHour) {
                 return null;
             }
             return (
