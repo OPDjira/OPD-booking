@@ -24,20 +24,17 @@ def booking(request):
                 serializer = dict(serializer.data)
                 serializer["name"] = i.name
                 response["bookings"].append(serializer)
-        print("Response:", response)  # Добавляем эту строку
         return JsonResponse(response, status=status.HTTP_200_OK)
 
 @csrf_exempt
 def make_booking(request):
     if request.method == "POST":
         data = json.loads((request.body.decode('utf-8')))
-        print("Received booking request data:", data)  # Добавляем эту строку
         building_id = data.get("building")
         audience_name = data.get("audience")
         date = data.get("date")
         time = data.get("time")
         student_email = data.get("email")
-        print("Request data:", building_id, audience_name, date, time, student_email)  # Добавляем эту строку
 
         if not all([building_id, audience_name, date, time, student_email]):
             return JsonResponse({"error": "Missing required fields"}, status=status.HTTP_400_BAD_REQUEST)
@@ -64,7 +61,6 @@ def make_booking(request):
             return JsonResponse({"error": "Booking already exists"}, status=status.HTTP_409_CONFLICT)
 
         serializer = BookingSerializer(booking)
-        print("Booking data:", serializer.data)  # Добавляем эту строку
         return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
 
     return JsonResponse({"error": "Invalid request method"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
@@ -75,9 +71,8 @@ def audiences(request):
     if request.method == "POST":
         response = {"audiences": []}
         data = json.loads((request.body.decode('utf-8')))
-        print("Received audiences request data:", data)  # Добавляем эту строку
         audiences = Audience.objects.filter(building=data["building"])
         for i in audiences:
-            response["audiences"].append({"interior_id": i.interior_id, "name": i.name})
-        print("Response:", response)  # Добавляем эту строку
+                serializer = AudienceSerializer(i)
+                response["audiences"].append(serializer.data)
         return JsonResponse(response, status=status.HTTP_200_OK)

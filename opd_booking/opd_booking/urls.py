@@ -24,5 +24,4 @@ urlpatterns = [
     path('booking/', timetable_views.booking),
     path('book/', timetable_views.make_booking),
     path('audiences/', timetable_views.audiences)
-
 ]
