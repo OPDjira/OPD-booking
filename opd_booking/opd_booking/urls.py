@@ -16,7 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from authapp import views as auth_views
+from timetable import views as timetable_views
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', auth_views.login),
+    path('booking/', timetable_views.booking),
+    path('book/', timetable_views.make_booking),
+    path('audiences/', timetable_views.audiences)
 ]

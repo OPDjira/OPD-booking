@@ -163,3 +163,4 @@ cython_debug/
 path/
 
 opd_booking/opd_booking/configs/pg_service.ini
+node_modules
