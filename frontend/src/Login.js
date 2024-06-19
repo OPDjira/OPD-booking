@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './login.css';
 
 function Login() {
     const history = useHistory();
@@ -34,17 +37,15 @@ function Login() {
             .then(data => {
                 console.log(data);
                 history.push('/MainPage', { student_email: username });
-
             })
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
-                console.log('Login failed. Please try again.');
-                window.alert('Login failed. Please try again.');
+                toast.error('Login failed. Please try again.');
             });
     };
 
     return (
-        <div className="login">
+       <div className="login">
         <div className="loginContainer" id="loginContainer">
                 <form onSubmit={handleSubmit}>
                 <h1>Sign in</h1>
@@ -53,6 +54,7 @@ function Login() {
                 <button type="submit">Login</button>
                 </form>
         </div>
+            <ToastContainer />
         </div>
     );
 }

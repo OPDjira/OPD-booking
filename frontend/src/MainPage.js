@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import './mainPage.css';
+
 
 const MainPage = ({ location }) => {
     const history = useHistory();
@@ -136,10 +138,11 @@ const MainPage = ({ location }) => {
 
         return (
             <div className='main_page'>
-                <h1>Бронирование аудиторий</h1>
+                <div className='MainPageContainer'>
+                <h1 className='MainPageContainer' >Бронирование аудиторий</h1>
                 {!selectedCampus ? (
                     <div>
-                        <h2>Выберите корпус:</h2>
+                        <h2 className='MainPageContainer'>Выберите корпус:</h2>
                         <select value={selectedCampus ? selectedCampus.id : ''} onChange={handleCampusSelect}>
                             <option value="">Выберите корпус</option>
                             {campuses.map((campus) => (
@@ -151,8 +154,8 @@ const MainPage = ({ location }) => {
                     </div>
                 ) : !selectedDate ? (
                     <div>
-                        <h2>Выбран корпус: {selectedCampus.name}</h2>
-                        <h2>Выберите дату:</h2>
+                            <h2 className='MainPageContainer'>Выбран корпус: {selectedCampus.name}</h2>
+                            <h2 className='MainPageContainer'>Выберите дату:</h2>
                         <div>
                             {renderDateButtons()}
                         </div>
@@ -160,9 +163,9 @@ const MainPage = ({ location }) => {
                     </div>
                 ) : !selectedTime ? (
                     <div>
-                        <h2>Выбран корпус: {selectedCampus.name}</h2>
-                        <h2>Выбрана дата: {selectedDate}</h2>
-                        <h2>Выберите время:</h2>
+                                <h2 className='MainPageContainer'>Выбран корпус: {selectedCampus.name}</h2>
+                                <h2 className='MainPageContainer'>Выбрана дата: {selectedDate}</h2>
+                                <h2 className='MainPageContainer'>Выберите время:</h2>
                         <div>
                             {renderTimeButtons()}
                         </div>
@@ -170,15 +173,15 @@ const MainPage = ({ location }) => {
                     </div>
                 ) : (
                     <div>
-                        <h2>Выбран корпус: {selectedCampus.name}</h2>
-                        <h2>Выбрана дата: {selectedDate}</h2>
-                        <h2>Выбрано время: {selectedTime}</h2>
+                                    <h2 className='MainPageContainer'>Выбран корпус: {selectedCampus.name}</h2>
+                                    <h2 className='MainPageContainer'>Выбрана дата: {selectedDate}</h2>
+                                    <h2 className='MainPageContainer'>Выбрано время: {selectedTime}</h2>
                         <button className='backStep' onClick={handleBackToTimeSelect}>Назад к выбору времени</button>
                         <button className='chooseRoomStep' onClick={handleProceedToAuditoriumSelection}>Перейти к выбору аудиторий</button>
                     </div>
                 )}
                 {loading && <p>Loading...</p>}
-
+                </div>
             </div>
         );
     };

@@ -1,0 +1,44 @@
+div.main_page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+}
+
+.main_page {
+    font-family: Arial, sans-serif;
+    background-color: #daf4bd47;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+}
+
+.main_page>div {
+    margin: 20px;
+}
+
+.backStep {
+    background-color: #f44336;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.backStep:hover {
+    background-color: #d32f2f;
+}
+
+.chooseRoomStep {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.chooseRoomStep:hover {
+    background-color: #45a049;
+}
