@@ -10,12 +10,12 @@ from timetable.serializers import BookingSerializer, AudienceSerializer
 from django.db.models import Q
 from authapp.models import Students
 
-# Create your views here.
 @csrf_exempt
 def booking(request):
     if request.method == "POST":
         response = {"bookings": []}
         data = json.loads((request.body.decode('utf-8')))
+        print("Received booking request data:", data)  # Добавляем эту строку
         audiences = Audience.objects.filter(building=data["building"])
         for i in audiences:
             query = Booking.objects.filter(date=data["date"], time=data["time"], audience=i.interior_id)
