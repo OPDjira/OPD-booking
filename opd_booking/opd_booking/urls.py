@@ -23,5 +23,7 @@ urlpatterns = [
     path('login/', auth_views.login),
     path('booking/', timetable_views.booking),
     path('book/', timetable_views.make_booking),
-    path('audiences/', timetable_views.audiences)
+    path('audiences/', timetable_views.audiences),
+    path('lk/', auth_views.lk)
+
 ]
