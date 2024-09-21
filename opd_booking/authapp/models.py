@@ -5,6 +5,9 @@ from django.db import models
 class Students(models.Model):
     username = models.CharField(max_length=50)
     password = models.CharField(max_length=30)
+    first_name = models.CharField(null=True)
+    last_name = models.CharField(null=True)
+    father_name = models.CharField(null=True)
     email = models.EmailField()
     ACCESS_CHOICES = (
         ('Student', 'Student'),
