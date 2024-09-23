@@ -1,0 +1,90 @@
+
+
+.login {
+    font-family: 'Montserrat', sans-serif;
+    background-image: url('LoginPage_background.png');
+    background-size: cover;
+    /* Масштабирует изображение для покрытия всего контейнера */
+    background-position: center;
+    /* Центрирует изображение */
+    background-repeat: no-repeat;
+    /* Избегает повторения изображения */
+    background-attachment: fixed;
+    /* Фиксирует изображение, чтобы оно оставалось на месте при прокрутке */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Задает высоту div на всю высоту экрана */
+    width: 100vw;
+    /* Задает ширину div на всю ширину экрана */
+    margin: 0;
+    padding: 0;
+    position: relative;
+    /* Необходимо для позиционирования псевдоэлемента */
+}
+
+.login::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Полупрозрачный черный слой */
+    z-index: 1;
+    /* Обеспечивает, что слой будет под содержимым */
+}
+
+.login>* {
+    position: relative;
+    /* Обеспечивает, что контент будет поверх затемненного слоя */
+    z-index: 2;
+    /* Контент поверх затемненного слоя */
+}
+
+div.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+}
+
+.loginContainer {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+input[type="text"].username,
+input[type="password"].password {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+
+
+button.submit {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+button:hover.submit {
+    background-color: #45a049;
+}
