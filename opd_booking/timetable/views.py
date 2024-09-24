@@ -46,7 +46,7 @@ def make_booking(request):
             return JsonResponse({"error": "Invalid building or audience"}, status=status.HTTP_404_NOT_FOUND)
 
         try:
-            student = Students.objects.get(email=student_email)
+            student = Students.objects.get(Q(email=student_email) | Q(username=student_email))
         except Students.DoesNotExist:
             return JsonResponse({"error": "Invalid student"}, status=status.HTTP_404_NOT_FOUND)
 
