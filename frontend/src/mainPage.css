@@ -1,44 +1,171 @@
-div.main_page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #0F303F;
+    color: white;
     height: 100vh;
 }
 
-.main_page {
-    font-family: Arial, sans-serif;
-    background-color: #daf4bd47;
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #112d3b;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.logo-icon {
+    font-size: 36px;
+    color: #4bbba8;
+    margin-right: 10px;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+.profile-name {
+    margin-left: 10px;
+    background-color: #1C3C4E;
+    color: white;
+    font-weight: bold;
+    padding: 0px 16px 0px 0px;
+    border-radius: 27px;
+    cursor: pointer;
+}
+
+.calendar-container {
+    margin: 20px;
+    background-color: #1C3C4E;
+    padding: 20px;
+    border-radius: 10px;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar-header h2 {
+    font-size: 24px;
+    color: white;
+}
+
+.reserve-btn {
+    background-color: #4bbba8;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+
+}
+
+.reserve-btn:hover {
+    background-color: #3cae98;
+}
+
+/* Дни недели */
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.weekday {
+    text-align: center;
+    font-weight: bold;
+    color: #4bbba8;
+    padding-bottom: 1%;
+    border-bottom: 2px solid #4bbba8;
+}
+
+/* Сетка календаря */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5%;
+}
+
+.calendar-cell {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+    padding: 10px;
+    text-align: left;
+    position: relative;
+    min-height: 120px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 100vh;
+    justify-content: space-between;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
 }
 
-.main_page>div {
-    margin: 20px;
-}
-
-.backStep {
-    background-color: #f44336;
-    color: white;
+.calendar-cell .day-number {
     font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.backStep:hover {
-    background-color: #d32f2f;
-}
-
-.chooseRoomStep {
-    background-color: #4CAF50;
+    font-size: 20px;
     color: white;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+    margin-bottom: 5px;
 }
 
-.chooseRoomStep:hover {
-    background-color: #45a049;
+.event {
+    background-color: rgba(75, 187, 168, 0.2);
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+    color: #4bbba8;
+    text-align: left;
+}
+
+/* Скрываем кнопку удаления по умолчанию */
+.delete-btn {
+    display: none;
+    /* Скрываем кнопку по умолчанию */
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    cursor: pointer;
+    color: #ff6161;
+    font-size: 16px;
+}
+
+/* Показываем кнопку при наведении на ячейку календаря */
+.calendar-cell:hover .delete-btn {
+    display: block;
+    /* Показываем кнопку при наведении */
+}
+
+
+.calendar-cell:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #4bbba8;
+}
+
+.calendar-cell.inactive {
+    background-color: rgba(255, 255, 255, 0);
+    /* Мягкий цвет для неактивных ячеек */
+    color: rgba(255, 255, 255, 0.301);
+    /* Светлый цвет текста для неактивных ячеек */
+    pointer-events: none;
+    /* Отключаем взаимодействие */
 }

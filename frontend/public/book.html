@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PolyBooking</title>
+    <link rel="stylesheet" href="book.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <span class="logo-icon">P.</span> PolyBooking
+        </div>
+        <div class="user-profile">
+            <img src="avatar-placeholder.png" alt="Аватар" class="avatar">
+            <div class="profile-name">Хамитова А.</div>
+        </div>
+    </header>
+
+    <main>
+        <section class="booking-section">
+            <div class="booking-controls">
+                <div class="control-item">
+                    <label for="building">Выберите корпус:</label>
+                    <select id="building">
+                        <option>Гидротехнический корпус</option>
+                        <option>Другой корпус</option>
+                    </select>
+                </div>
+
+                <div class="control-item">
+<div class="control-item">
+    <label for="date">Выберите дату:</label>
+    <select id="date-select">
+        <!-- Даты будут добавлены через JS или заранее в HTML -->
+    </select>
+</div>
+                </div>
+
+                <div class="control-item">
+                    <label for="time">Выберите время:</label>
+                    <input type="time" id="time" value="08:00">
+                </div>
+
+                <p>Ищу свободные аудитории...</p>
+                <div class="room-grid">
+                    <!-- Пример кнопок с номерами аудиторий -->
+                    <button class="room">327</button>
+                    <button class="room">328</button>
+                    <button class="room">329</button>
+                </div>
+            </div>
+
+            <div class="floor-plan">
+                <img src="floor-plan-placeholder.png" alt="План этажа" class="plan-image">
+            </div>
+        </section>
+
+        <button class="book-btn">Забронировать</button>
+    </main>
+
+    <script>document.addEventListener("DOMContentLoaded", function () {
+            const dateSelect = document.getElementById('date-select');
+
+            // Массив с доступными датами
+            const availableDates = [
+                "25.09.2024",
+                "26.09.2024",
+                "27.09.2024",
+                "28.09.2024",
+                "29.09.2024"
+            ];
+
+            // Генерация списка дат
+            availableDates.forEach(date => {
+                const option = document.createElement('option');
+                option.value = date;
+                option.textContent = date;
+                dateSelect.appendChild(option);
+            });
+        });
+</script>
+</body>
+
+</html>

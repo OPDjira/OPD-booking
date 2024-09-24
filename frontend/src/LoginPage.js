@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './login.css';
+import './LoginPage.css';
 
-function Login() {
-    const history = useHistory();
+function LoginPage() {
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -36,7 +36,7 @@ function Login() {
             })
             .then(data => {
                 console.log(data);
-                history.push('/MainPage2', { student_email: username });
+                navigate('/MainPage', { state: { student_email: username } });
             })
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
@@ -48,10 +48,10 @@ function Login() {
        <div className="login">
         <div className="loginContainer" id="loginContainer">
                 <form onSubmit={handleSubmit}>
-                <h1>Sign in</h1>
-                <input type="text" className="username" id="username" placeholder="Email" value={username} onChange={handleUsernameChange} />
-                <input type="password" className="password" id="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
-                <button type="submit">Login</button>
+                <h1 className='SignIn'>Вход</h1>
+                <input type="text" className="username" id="username" placeholder="Имя пользователя" value={username} onChange={handleUsernameChange} />
+                <input type="password" className="password" id="password" placeholder="Пароль" value={password} onChange={handlePasswordChange} />
+                <button className="submit" type="submit">Войти</button>
                 </form>
         </div>
             <ToastContainer />
@@ -59,4 +59,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default LoginPage;
