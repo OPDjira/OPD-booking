@@ -110,7 +110,7 @@ const MainPage = ({ location }) => {
 
         const jsonData = JSON.stringify(selectedValues);
         console.log(jsonData);
-        fetch('http://31.134.129.26:8000/booking/', {
+        fetch('http://localhost:8000/booking/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -185,5 +185,7 @@ const MainPage = ({ location }) => {
             </div>
         );
     };
+
+
 
 export default MainPage;

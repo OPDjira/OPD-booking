@@ -20,7 +20,7 @@ function Login() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const loginData = { username, password };
-        fetch('http://31.134.129.26:8000/login/', {
+        fetch('http://localhost:8000/login/', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
@@ -36,7 +36,7 @@ function Login() {
             })
             .then(data => {
                 console.log(data);
-                history.push('/MainPage', { student_email: username });
+                history.push('/MainPage2', { student_email: username });
             })
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);

@@ -106,7 +106,7 @@ function Gidro1( props ) {
     const handleBookAuditorium = (auditoriumId) => {
         let selectedValues = {
             building: selectedCampus.id,
-            audience: auditoriumId,
+            audience: parseInt(auditoriumId),
             date: selectedDate,
             time: selectedTime,
             email: student_email
@@ -115,7 +115,7 @@ function Gidro1( props ) {
         console.log(selectedValues);
         const jsonData = JSON.stringify(selectedValues);
 
-        fetch('http://31.134.129.26:8000/book/', {
+        fetch('http://localhost:8000/book/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
