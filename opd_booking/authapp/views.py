@@ -48,7 +48,7 @@ def lk(request):
                 booking_data = books_sr.data
                 audience = Audience.objects.get(interior_id=books_sr.data.get("audience"))
                 audience_name = audience.name
-                booking_data["audience"] = audience_name
+                booking_data["audience_name"] = audience_name
                 data["bookings"].append(booking_data)
             return JsonResponse(data, status=status.HTTP_200_OK)
         except Exception:
