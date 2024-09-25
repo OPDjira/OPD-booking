@@ -76,3 +76,26 @@ def audiences(request):
                 serializer = AudienceSerializer(i)
                 response["audiences"].append(serializer.data)
         return JsonResponse(response, status=status.HTTP_200_OK)
+
+
+@csrf_exempt
+def delete_booking(request):
+    if request.method == "POST":
+        data = json.loads((request.body.decode('utf-8')))
+        audience_id = data.get("audience")
+        date = data.get("date")
+        time = data.get("time")
+        ordered_by = data.get("ordered_by")
+
+        if not all([audience_id, date, time, ordered_by]):
+            return JsonResponse({"error": "Missing required fields"}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            booking = Booking.objects.get(audience=audience_id, time=time, date=date, ordered_by=ordered_by)
+        except (Booking.DoesNotExist):
+            return JsonResponse({"error": "Invalid booking"}, status=status.HTTP_404_NOT_FOUND)
+
+        booking.delete()
+        return JsonResponse({"success": "reservation has been cancelled"}, status=status.HTTP_200_OK)
+
+    return JsonResponse({"error": "Invalid request method"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
