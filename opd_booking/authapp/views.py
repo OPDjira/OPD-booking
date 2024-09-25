@@ -9,6 +9,7 @@ from rest_framework.renderers import JSONRenderer
 from authapp.models import Students
 from authapp.serializers import StudentsSerializer
 from django.db.models import Q
+from timetable.models import Audience
 
 
 from timetable.models import Booking
@@ -44,7 +45,11 @@ def lk(request):
             data["bookings"] = []
             for i in query_books:
                 books_sr = BookingSerializer(i)
-                data["bookings"].append(books_sr.data)
+                booking_data = books_sr.data
+                audience = Audience.objects.get(interior_id=books_sr.data.get("audience"))
+                audience_name = audience.name
+                booking_data["audience"] = audience_name
+                data["bookings"].append(booking_data)
             return JsonResponse(data, status=status.HTTP_200_OK)
         except Exception:
             return JsonResponse(data={}, status=status.HTTP_404_NOT_FOUND)
