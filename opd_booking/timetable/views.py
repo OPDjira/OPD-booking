@@ -80,7 +80,7 @@ def audiences(request):
 
 @csrf_exempt
 def delete_booking(request):
-    if request.method == "POST":
+    if request.method == "DELETE":
         data = json.loads((request.body.decode('utf-8')))
         audience_id = data.get("audience")
         date = data.get("date")
