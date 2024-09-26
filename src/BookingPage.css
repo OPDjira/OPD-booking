@@ -1,0 +1,201 @@
+/* Общие стили */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #0e1a2b;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+/* Стили для заголовка */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #162b40;
+    padding: 15px 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Логотип */
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+/* Профиль пользователя */
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+/* Кнопка выхода */
+.logout-btn {
+    background-color: #4bbba8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 10px;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #3cae98;
+}
+
+.profile-name {
+    color: #fff;
+    font-size: 18px;
+    margin-left: 15px;
+}
+
+/* Основные стили */
+main {
+    padding: 20px 40px;
+}
+
+/* Секции бронирования */
+.booking-section {
+    display: flex;
+    justify-content: space-between;
+    background-color: #ffffff;
+    color: #000;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+/* Контролы бронирования */
+.booking-controls {
+    width: 40%;
+}
+
+/* Элементы управления */
+.control-item {
+    margin-bottom: 20px;
+}
+
+/* Стили для селектов */
+select, input[type="date"], input[type="time"] {
+    width: 100%;
+    padding: 10px 15px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: #f7f7f7;
+    color: #162b40;
+}
+
+/* Сетка аудиторий */
+.room-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* Кнопки аудиторий */
+.room {
+    padding: 12px;
+    border: none;
+    background-color: #e0f2f1;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #162b40;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+}
+
+.room:hover {
+    background-color: #00bfa6;
+    color: #fff;
+}
+
+/* Стили модального окна */
+.modal {
+    display: flex;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 25%;
+}
+
+/* Кнопка подтверждения */
+.confirm-btn {
+    display: block;
+    width: fit-content;
+    padding: 10px 20px;
+    background-color: #00bfa6;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.confirm-btn:hover {
+    background-color: #00a58e;
+}
+
+/* Мобильные стили */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .booking-section {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .booking-controls {
+        width: 100%;
+    }
+
+    .control-item {
+        margin-bottom: 10px;
+    }
+
+    .room-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .modal-content {
+        width: 90%;
+    }
+
+    .logout-btn {
+        font-size: 12px;
+        padding: 8px 16px;
+    }
+}

@@ -1,0 +1,271 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #0F303F;
+    color: white;
+    height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #112d3b;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.calendar-container {
+    margin: 20px;
+    background-color: #1C3C4E;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.event {
+    position: relative;
+    padding-right: 20px;
+}
+
+.event .delete-btn {
+    display: none;
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+}
+
+.event.hovered .delete-btn {
+    display: inline-block;
+}
+
+/* Стили для профиля пользователя */
+.user-profile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.profile-avatar img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    transition: transform 0.3s ease;
+}
+
+.user-profile:hover .profile-avatar img {
+    transform: scale(1.05);
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.logout-btn {
+    position: absolute;
+    bottom: -50%;
+    margin-left: 50%;
+    left: 0;
+    background-color: #4bbba8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 10px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    margin-right: 10px;
+}
+
+.user-profile:hover .logout-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.logout-btn:hover {
+    background-color: #3cae98;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar-header h2 {
+    font-size: 24px;
+    color: white;
+}
+
+.reserve-btn {
+    background-color: #4bbba8;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.reserve-btn:hover {
+    background-color: #3cae98;
+}
+
+/* Дни недели */
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.weekday {
+    text-align: center;
+    font-weight: bold;
+    color: #4bbba8;
+    padding-bottom: 1%;
+    border-bottom: 2px solid #4bbba8;
+}
+
+/* Сетка календаря */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5%;
+}
+
+.calendar-cell {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+    padding: 10px;
+    text-align: left;
+    position: relative;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.calendar-cell .day-number {
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.event {
+    background-color: rgba(75, 187, 168, 0.2);
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+    color: #4bbba8;
+    text-align: left;
+}
+
+/* Скрываем кнопку удаления по умолчанию */
+.delete-btn {
+    display: none;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    cursor: pointer;
+    color: #4bbba8;
+    font-size: 16px;
+}
+
+.calendar-cell:hover .delete-btn {
+    display: block;
+}
+
+.calendar-cell:hover {
+    background-color: #3cae98(255, 255, 255, 0.1);
+}
+
+.calendar-cell.inactive {
+    background-color: rgba(255, 255, 255, 0);
+    color: rgba(255, 255, 255, 0.301);
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .calendar-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .calendar-cell {
+        min-height: 80px;
+    }
+
+    .reserve-btn {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+
+    .calendar-header h2 {
+        font-size: 18px;
+    }
+
+    .weekdays {
+        display: none;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+
+    .header {
+        padding: 10px;
+    }
+
+    .calendar-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .calendar-cell {
+        min-height: 60px;
+    }
+
+    .weekday {
+        font-size: 12px;
+    }
+
+    .calendar-header h2 {
+        font-size: 16px;
+    }
+
+    .reserve-btn {
+        padding: 5px;
+        font-size: 10px;
+    }
+}

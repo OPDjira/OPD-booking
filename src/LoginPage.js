@@ -1,73 +1,62 @@
-import React, { useState, useEffect } from 'react';
-import "./main.css";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './LoginPage.css';
 
-function MainPage() {
-    const [currentDate, setCurrentDate] = useState(new Date());
-    const [displayedDays, setDisplayedDays] = useState([]);
+function LoginPage() {
+    const navigate = useNavigate();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
-    useEffect(() => {
-        const daysArray = [];
-        const startDate = new Date(currentDate);
+    const handleUsernameChange = (e) => {
+        setUsername(e.target.value);
+    };
 
-        // Сдвигаем дату на нужный день недели (понедельник)
-        const dayOfWeek = startDate.getDay(); // Получаем день недели (0 - вс, 1 - пн, ...)
-        const shift = (dayOfWeek === 0) ? -6 : (1 - dayOfWeek); // Если воскресенье, сдвигаем на -6
-        startDate.setDate(startDate.getDate() + shift); // Устанавливаем начало недели на понедельник
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+    };
 
-        // Добавляем 28 дней
-        for (let i = 0; i < 28; i++) {
-            const newDate = new Date(startDate);
-            newDate.setDate(startDate.getDate() + i);
-            daysArray.push(newDate);
-        }
-
-        setDisplayedDays(daysArray);
-    }, [currentDate]);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const loginData = { username, password };
+        fetch('http://localhost:8000/login/', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(loginData),
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Network response was not ok.');
+            })
+            .then(data => {
+                console.log(data);
+                navigate('/MainPage', { state: { student_email: username } });
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+                toast.error('Login failed. Please try again.');
+            });
+    };
 
     return (
-        <div className="body">
-            <header className="header">
-                <article className="logo">
-                    <span className="logo-icon">P.</span> PolyBooking
-                </article>
-                <article className="user-profile">
-                    <div className="profile-avatar">
-                        <img src="https://via.placeholder.com/50" alt="Аватар пользователя" />
-                    </div>
-                    <div className="profile-info">
-                        <button className="profile-name">Хамитова А.</button>
-                    </div>
-                </article>
-            </header>
-            <main className="calendar-container">
-                <section className="calendar-header">
-                    <h2>{currentDate.toLocaleString('ru-RU', { month: 'long' }).charAt(0).toUpperCase() + currentDate.toLocaleString('ru-RU', { month: 'long' }).slice(1)} {currentDate.getFullYear()}</h2>
-                    <button className="reserve-btn">Забронировать аудиторию</button>
-                </section>
-                <section className="weekdays">
-                    <article className="weekday">Пн</article>
-                    <article className="weekday">Вт</article>
-                    <article className="weekday">Ср</article>
-                    <article className="weekday">Чт</article>
-                    <article className="weekday">Пт</article>
-                    <article className="weekday">Сб</article>
-                    <article className="weekday">Вс</article>
-                </section>
-                <section className="calendar-grid">
-                    {displayedDays.map((date, index) => {
-                        const isPastDate = date < new Date(); // Проверяем, если дата прошедшая
-                        return (
-                            <article className={`calendar-cell ${isPastDate ? 'inactive' : ''}`} key={index}>
-                                <span className="day-number">{date.getDate()}</span>
-                                <div className="event">14:00 ГЗ 25</div>
-                                <div className="delete-btn">🗑</div>
-                            </article>
-                        );
-                    })}
-                </section>
-            </main>
+       <div className="login">
+        <div className="loginContainer" id="loginContainer">
+                <form onSubmit={handleSubmit}>
+                <h1 className='SignIn'>Вход</h1>
+                <input type="text" className="username" id="username" placeholder="Имя пользователя" value={username} onChange={handleUsernameChange} />
+                <input type="password" className="password" id="password" placeholder="Пароль" value={password} onChange={handlePasswordChange} />
+                <button className="submit" type="submit">Войти</button>
+                </form>
+        </div>
+            <ToastContainer theme='dark'/>
         </div>
     );
 }
 
-export default MainPage;
+export default LoginPage;
